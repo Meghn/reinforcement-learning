@@ -119,6 +119,20 @@ To do so install Pytorch with cuda or ROCm.
 
 ## 4. Testing and Evaluation
 
+### Monitoring in Tensorboard
+
+We can review evaluation, time and training metrics from within the Tensorboard. In order to do so you must specify a logging directory when you initialize your model.
+
+model = PPO('MlpPolicy', env, verbose=1, **```tensorboard_log=log_path```**) 
+
+```python
+# Starting TensorBoard
+!tensorboard --logdir=log_path
+````
+
+
+
+
 ## 5. Callbacks, Alt Algorithms, Architectures
 
 ## 6. Projects
