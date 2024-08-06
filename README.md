@@ -128,12 +128,56 @@ model = PPO('MlpPolicy', env, verbose=1, **```tensorboard_log=log_path```**)
 ```python
 # Starting TensorBoard
 !tensorboard --logdir=log_path
-````
-
-
-
+```
 
 ## 5. Callbacks, Alt Algorithms, Architectures
+
+We can specify a reward threshold so the training stops once we reach this benchmark. This is to stop the training of the model to become more unstable.
+
+### Applying Callbacks
+
+
+**Import callback helpers**
+```python
+from stable_baselines3.common.callbacks import EvalCallback, StopTrainingOnRewardThreshold
+```
+
+**Setup Callbacks**
+```python
+stop_callback = StopTrainingOnRewardThreshold(reward_threshold=190, verbose=1)
+eval_callback = EvalCallback(env, 
+                             callback_on_new_best=stop_callback, 
+                             eval_freq=10000, 
+                             best_model_save_path=save_path, 
+                             verbose=1)
+```
+
+**Apply callback to training step**
+```python
+model.learn(total_timesteps=20000, callback=eval_callback)
+```
+
+### Modifying Neural Network Architecture
+
+We can change the underlying neural network which SB uses as part of policy.
+
+**Define new MLP Network**
+```python
+net_arch=[dict(pi=[128, 128, 128, 128], vf=[128, 128, 128, 128])]
+```
+
+**Apply Network**
+```python
+model = PPO('MlpPolicy', env, verbose = 1, policy_kwargs={'net_arch': net_arch})
+```
+
+### Using different Algorithms
+
+```python
+from stable_baselines3 import DQN
+
+model = DQN('MlpPolicy', env, verbose = 1, tensorboard_log=log_path)
+```
 
 ## 6. Projects
 
