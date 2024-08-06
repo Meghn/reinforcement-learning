@@ -7,6 +7,7 @@ Reinforcement Learning focuses on teaching agents through trial and error.
 ### Concepts
 
 ![](RL.png)
+
 There are 4 fundamental concepts that underpin most RL projects. These are:  
 **Agent**:  The actor operating within the environment. It is usually governed by a policy (a rule that decides what action to take)  
 **Environment**:  The world in which the agent can operate in.  
@@ -70,7 +71,51 @@ E.g. ```MultiBinary(4)```
 - **MultiDiscrete** - multiple discrete values  
 E.g. ```MultiDiscrete([5,2,2])```
 
+The Environment contains both observation space and the action space.
+
 ## 3. Training
+
+### Types of Algorithm
+
+Model vs Model-Free: Learning based on predictions of next state/reward or real samples.   
+Stable baselines focuses on Model-Free Algorithms.
+
+![Algos](Algorithms.png)
+__Source__: https://spinningup.openai.com/en/latest/
+
+**Model-Free vs Model-Based**
+One of the most important branching points in an RL algorithm is the question of **whether the agent has access to (or learns) a model of the environment**. By a model of the environment, we mean a function which predicts state transitions and rewards.   
+The main upside to having a model is that **it allows the agent to plan** by thinking ahead, seeing what would happen for a range of possible choices, and explicitly deciding between its options.   
+The main downside is that **a ground-truth model of the environment is usually not available to the agent**.   
+Algorithms which use a model are called **model-based** methods, and those that don’t are called **model-free**.
+
+### Choosing Algorithms
+
+There are a number of algorithms available through Stable Baselines. We can easily switch between them.   
+Certain algorithms will perform better for certain environments.   
+
+**Action Space**
+Discrete Single Process: DQN
+Discrete multi-processed: PPO or A2C
+Continuous Single Process: SAC or TD3
+Continuous Multi Processed: PPO or A2C
+
+![Algo_compare](More_Algos.png)
+
+### Understanding Training Metrics
+
+- **Evaluation Metrics**: ep_len_mean (episode length), ep_rew_mean (episode reward)
+- **Time Metrics**: fps, iterations, time_elapsed, total_timesteps
+- **Loss Metric**: entropy_loss, policy_loss, value_loss
+- **Other Metrics**: explained variance, learning rate, n_updates
+
+### Applying GPU Acceleration
+
+**Does not garuntee in significant speed boosts.**    
+To do so install Pytorch with cuda or ROCm.  
+- Go to pytorch.org and hit install
+- Go down and choose based on preferences.
+- For CUDA you would require a Nvidia processor.
 
 ## 4. Testing and Evaluation
 
