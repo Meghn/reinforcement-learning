@@ -183,6 +183,15 @@ model = DQN('MlpPolicy', env, verbose = 1, tensorboard_log=log_path)
 
 ### a. Breakout
 
+Similar to the above discussed method.  
+We use ```make_atari_env``` and the A2C algorithm.
+We did not vectorize the environment in the CartPole case. Here we will train on 4 environments at the same time, hence vectorization is useful here to speed up training.
+
 ### b. Self Driving
 
 ### c. Custom Environments
+
+## 7. RL for Games
+
+### a. Chrome Dino
+
